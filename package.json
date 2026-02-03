@@ -1,0 +1,30 @@
+{
+  "name": "erasys-monorepo-architecture",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w apps/web-next",
+    "dev:spa": "npm run dev -w apps/web-spa",
+    "build": "npm run build --workspaces",
+    "test": "npm run test -w packages/profile-images",
+    "lint": "npm run lint --workspaces"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivkremer/erasys-monorepo-architecture.git"
+  },
+  "author": "Ilya Kremer",
+  "description": "A code challenge for Erasys.",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.3",
+    "prettier": "^3.8.1"
+  }
+}

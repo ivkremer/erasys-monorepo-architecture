@@ -1,0 +1,11 @@
+{
+  "name": "@repo/profile-images",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "vitest",
+    "lint": "eslint . --ext .ts,.tsx && tsc --noEmit",
+    "lint:fix": "eslint . --fix --ext .ts,.tsx && tsc --noEmit"
+  }
+}
