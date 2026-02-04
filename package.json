@@ -10,7 +10,12 @@
     "dev:spa": "npm run dev -w apps/web-spa",
     "build": "npm run build --workspaces",
     "test": "npm run test -w packages/profile-images",
-    "lint": "npm run lint --workspaces"
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces",
+    "lint-staged": "lint-staged",
+    "prettier": "npm run prettier --workspaces",
+    "prettier:verbose": "npm run prettier:verbose --workspaces",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -25,6 +30,16 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react": "^7.37.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.8.1"
+  },
+  "lint-staged": {
+    "**/*": [
+      "prettier --write --ignore-unknown"
+    ],
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
