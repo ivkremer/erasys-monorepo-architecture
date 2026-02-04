@@ -1,4 +1,4 @@
-import { fetchProfileImages, getPictureUrl } from '@repo/profile-images';
+import { fetchProfileImages, type ProfilePicture } from '@repo/profile-images';
 import { PageLayout } from '@/components/layouts/PageLayout';
 import { ImagesGrid } from './_components/ImagesGrid';
 import { PROFILE_SLUG } from './constants';
@@ -14,18 +14,19 @@ export const metadata = {
 };
 
 export default async function Home() {
-  let images: string[] = [];
+  let images: ProfilePicture[] = [];
+  let isError = false;
 
   try {
-    const response = await fetchProfileImages(PROFILE_SLUG);
-    images = response.pictures.map(({ url_token }) => getPictureUrl(url_token));
+    images = await fetchProfileImages(PROFILE_SLUG);
   } catch (_) {
+    isError = true;
     // notFound(); can be called here alternatively to the current implementation.
   }
 
   return (
     <PageLayout title={PAGE_TITLE}>
-      <ImagesGrid images={images} />
+      <ImagesGrid images={images} error={isError} />
     </PageLayout>
   );
 }

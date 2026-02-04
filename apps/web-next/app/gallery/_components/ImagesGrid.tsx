@@ -1,30 +1,36 @@
 import Image from 'next/image';
+import type { ProfilePicture } from '@repo/profile-images';
+import { FailureAlert } from './FailureAlert';
+import { EAGER_LOADING_THRESHOLD } from './constants';
 
 type Props = {
-  images: string[];
+  images: ProfilePicture[];
+  error: boolean;
 };
 
-export const ImagesGrid = ({ images }: Props) => {
-  if (images.length === 0) {
-    return (
-      <div className="flex items-center justify-center rounded-lg border border-border bg-muted text-muted-foreground h-48">
-        <p>No images to display ):</p>
-      </div>
-    );
+export const ImagesGrid = ({ images, error }: Props) => {
+  if (error) {
+    return <FailureAlert>Failed to load images ):</FailureAlert>;
+  }
+
+  if (!images.length) {
+    return <FailureAlert>There are no images at the moment.</FailureAlert>;
   }
 
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {images.map((imageUrl) => (
-        <li key={imageUrl} className="relative aspect-square overflow-hidden rounded-lg bg-muted shadow-sm">
-          <a href={imageUrl} target="_blank" rel="noreferrer">
+      {images.map(({ id, url }, index) => (
+        <li key={id} className="relative aspect-square overflow-hidden rounded-lg bg-muted shadow-sm">
+          <a href={url} target="_blank" rel="noreferrer" className="absolute inset-0">
             <Image
-              src={imageUrl}
+              src={url}
               alt="Profile image"
               fill
               className="object-cover object-center hover:scale-105 transition-transform"
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              priority={false}
+              loading={index < EAGER_LOADING_THRESHOLD ? 'eager' : 'lazy'}
+              preload={index < EAGER_LOADING_THRESHOLD}
+              decoding="async"
             />
           </a>
         </li>

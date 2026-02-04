@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
   "scripts": {
     "test": "vitest",
     "lint": "eslint . --ext .ts,.tsx && tsc --noEmit",
     "lint:fix": "eslint . --fix --ext .ts,.tsx && tsc --noEmit",
     "prettier": "prettier --write \"**/*.{ts,tsx,md,css}\" | grep -v \" (unchanged)$\" &2>/dev/null",
     "prettier:verbose": "prettier --write \"**/*.{ts,tsx,md,css}\""
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
   }
 }
