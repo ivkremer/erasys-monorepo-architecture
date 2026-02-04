@@ -1,0 +1,1 @@
+export const EAGER_LOADING_THRESHOLD = 4;

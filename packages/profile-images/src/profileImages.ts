@@ -1,19 +1,44 @@
-type Picture = {
-  url_token: string;
+import { z } from 'zod';
+import { dataApiBaseUrl, pictureBaseUrl } from './constants';
+
+const PictureApiSchema = z.object({
+  url_token: z.string(),
+  width: z.number(),
+  height: z.number(),
+  id: z.string(),
+});
+
+const ProfileResponseSchema = z.object({
+  pictures: z.array(PictureApiSchema),
+});
+
+export type ProfilePicture = {
+  url: string;
+  width: number;
+  height: number;
+  id: string;
 };
 
-type ProfileResponse = {
-  pictures: Picture[];
-};
-
-export const fetchProfileImages = async (profileSlug: string): Promise<ProfileResponse> => {
-  const res = await fetch(`https://hunqz.com/api/opengrid/profiles/${profileSlug}`);
+/**
+ * Returns a promise with profile pictures (array).
+ *
+ * @param {string} profileSlug
+ * @throws {Error} in case of failed request or invalid API response.
+ * @return Promise<ProfilePicture[]>
+ */
+export const fetchProfileImages = async (profileSlug: string): Promise<ProfilePicture[]> => {
+  const res = await fetch(`${dataApiBaseUrl}/${profileSlug}`);
 
   if (!res.ok) {
     throw new Error(`Failed to fetch profile data for '${profileSlug}'.`);
   }
 
-  return res.json();
-};
+  const data = ProfileResponseSchema.parse(await res.json());
 
-export const getPictureUrl = (token: string) => `https://hunqz.com/img/usr/original/0x0/${token}.jpg`;
+  return data.pictures.map(({ url_token, width, height, id }) => ({
+    url: `${pictureBaseUrl}/${url_token}.jpg`,
+    id,
+    width,
+    height,
+  }));
+};
