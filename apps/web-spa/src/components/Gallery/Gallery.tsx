@@ -27,6 +27,7 @@ export const Gallery = () => {
               alt={`Profile image (${index + 1})`}
               className="w-full h-full object-cover object-center hover:scale-105 transition-transform"
               loading={index < EAGER_LOADING_THRESHOLD ? 'eager' : 'lazy'}
+              fetchPriority={index < EAGER_LOADING_THRESHOLD ? 'high' : 'low'}
               decoding="async"
             />
           </a>
