@@ -1,1 +1,1 @@
-export * from './profileImages';
+export * from './client';

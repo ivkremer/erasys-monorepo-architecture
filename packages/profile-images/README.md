@@ -1,27 +1,21 @@
 # Profile Images Module
 
-Fetches profile data from the public API and provides the array of profile pictures.
-
-## Prerequisites
-
-This package relies on the following environment variables:
-
-```shell
-PROFILE_DATA_API_URL='https://hunqz.com/api/opengrid/profiles'
-PROFILE_PICTURE_API_URL='https://hunqz.com/img/usr/original/0x0'
-```
-
-When not provided, the module falls back to the default values.
+A client which fetches profile data from the specific API and provides the array of profile pictures.
 
 ## Usage
 
 ```typescript
-import { fetchProfileImages, type ProfilePicture } from '@repo/profile-images';
+import { ProfileClient, type ProfilePicture } from '@repo/profile-images';
+
+export const client = new ProfileClient({
+  dataApiBaseUrl: '/your/api/opengrid/profiles',
+  pictureBaseUrl: 'https://yourimageshost/img/usr/original/0x0',
+});
 
 let images: ProfilePicture[] = [];
 
 try {
-  images = await fetchProfileImages(PROFILE_SLUG);
+  images = await client.fetchProfileImages('profile-slug');
 } catch (error) {
   // handle error
 }
@@ -29,11 +23,11 @@ try {
 
 ## [Comment for the reviewer]
 
-Note, that thanks to the `exports` section in `package.json` and overall architecture of this package, one cannot import
-the constants directly from the module:
+Note, that thanks to the `exports` section in `package.json` and overall architecture of this package, one cannot
+import just anything from the rest of the files (if any) e.g.,
 
 ```javascript
-import { dataApiBaseUrl } from '@repo/profile-images/src/constants';
+import { someExport } from '@repo/profile-images/src/some-file';
 ```
 
 This helps to avoid possible namespace pollution and encapsulate variables which are not meant to be used directly.
