@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import type { ProfilePicture } from '@repo/profile-images';
+import type { ProfileImage } from '@repo/profile-images';
 import { FailureAlert } from './FailureAlert';
 import { EAGER_LOADING_THRESHOLD } from './constants';
 
 type Props = {
-  images: ProfilePicture[];
+  images: ProfileImage[];
   error: boolean;
 };
 

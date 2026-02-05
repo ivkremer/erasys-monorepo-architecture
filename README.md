@@ -1,10 +1,11 @@
 # Erasys Monorepo Architecture
 
-This is a monorepo with [`turbo`](https://turborepo.dev) used.
+This is a [`turbo`](https://turborepo.dev)-powered monorepo.
 
 ## Prerequisites
 
-The Next.js app requires Node.js version `>=20.9` to run smoothly and Vite app requires Node.js version `>=20.19`.
+Please make sure you have Node.js version `>=20.19` installed as the Next.js app requires Node.js version `>=20.9` to
+run smoothly and Vite app requires Node.js version `>=20.19`.
 
 ## Getting Started
 
@@ -29,9 +30,13 @@ See the shared [`profile-images`](./packages/profile-images) package.
 Run its specs:
 
 ```shell
-npm i
 npm run test
 ```
+
+## Shared Module
+
+The shared module is completely agnostic towards any frameworks/environments. But it provides a very reliable way to
+work with the specified API.
 
 ## Available Scripts
 

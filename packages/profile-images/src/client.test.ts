@@ -1,16 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { z } from 'zod';
-import { ProfileClient } from './client';
+import { ProfileImagesClient } from './client';
 import { ProfileResponseSchema } from './schemas';
 import { ApiResponseError, ResponseErrorCode } from './errors';
 
 const mockDataApiBaseUrl = 'https://www.hunqz.com/api/opengrid/profiles';
 const mockPictureBaseUrl = 'https://www.hunqz.com/img/usr/original/0x0';
 
-let client: ProfileClient;
+let client: ProfileImagesClient;
 
 beforeEach(() => {
-  client = new ProfileClient({
+  client = new ProfileImagesClient({
     dataApiBaseUrl: mockDataApiBaseUrl,
     pictureBaseUrl: mockPictureBaseUrl,
   });
@@ -19,7 +19,7 @@ beforeEach(() => {
 type ProfileResponse = z.infer<typeof ProfileResponseSchema>;
 const jsonHeaders = { 'Content-Type': 'application/json' } as const;
 
-describe('ProfileClient', () => {
+describe('ProfileImagesClient', () => {
   it('should return correctly mapped pictures', async () => {
     const fakeResponse: ProfileResponse = {
       pictures: [
