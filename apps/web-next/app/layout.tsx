@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { WEBSITE_NAME, WEBSITE_TITLE_DIVISOR } from '@/constants';
+import { WEBSITE_DESCRIPTION, WEBSITE_NAME, WEBSITE_TITLE_DIVISOR } from '@/constants';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       rel: 'icon',
     },
   ],
-  description: 'A take-home task made by Ilya Kremer',
+  description: WEBSITE_DESCRIPTION,
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js app
+
+This is a simple Next.js app with Tailwind CSS which uses the [profile-images](../../packages/profile-images).
 
 ## Getting Started
 
-First, run the development server:
+### TL;DR
 
-```bash
+```shell
+npm i
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+open http://localhost:3000 # see the link in the output
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Details
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+While `profile-images` has its default values for the API URLs, you can specify your own with the local
+[`.env`](./env):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```shell
+PROFILE_DATA_API_URL='https://hunqz.com/api/opengrid/profiles'
+PROFILE_PICTURE_API_URL='https://hunqz.com/img/usr/original/0x0'
+```
 
-## Learn More
+The profile slug can also be sourced from `.env`. See the [`.env.example`](./env.example).
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. `npm run dev` — starts the Next.js dev server.
+2. `npm run build` — builds the Next.js app.
+3. `npm run start` — runs the production build.
+4. `npm run lint` — runs ESLint and checks for Typescript integrity.
+5. `npm run lint:fix` — same as `npm run lint` but fixes linting errors when possible.
+6. `npm run prettier` — runs Prettier silently.
+7. `npm run prettier:verbose` — runs Prettier with verbose output.
