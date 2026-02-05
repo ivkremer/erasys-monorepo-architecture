@@ -15,7 +15,7 @@
     "lint-staged": "lint-staged",
     "prettier": "npm run prettier --workspaces",
     "prettier:verbose": "npm run prettier:verbose --workspaces",
-    "prepare": "husky"
+    "prepare": "node scripts/prepare-husky.cjs"
   },
   "repository": {
     "type": "git",
