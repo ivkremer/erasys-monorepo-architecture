@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import { type Metadata } from 'next';
-import { type ProfilePicture } from '@repo/profile-images';
+import { ApiResponseError, type ProfilePicture } from '@repo/profile-images';
 import { mergeOpenGraph } from '@/lib/next-utils/mergeOpenGraph';
 import { PageLayout } from '@/components/layouts/PageLayout';
 import { profileImagesClient } from '@/lib/clients/ProfileImages';
@@ -56,11 +56,16 @@ export default async function Home() {
 
   try {
     images = await getProfileImages(PROFILE_SLUG);
-  } catch {
+  } catch (error) {
     isError = true;
+    // Note that actually we can use translations or specific error handling because we have error codes.
+    // The console.log statement below is left for demonstration purposes.
+    // eslint-disable-next-line no-console
+    console.log('error', (error as ApiResponseError).code);
     // notFound(); can be called here alternatively to the current implementation.
   }
 
+  // But as a simplification, we just render depending on the error presence itself:
   return (
     <PageLayout title={PAGE_TITLE}>
       <ImagesGrid images={images} error={isError} />

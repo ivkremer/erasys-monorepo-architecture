@@ -4,6 +4,8 @@ import { profileImagesClient } from '@/lib/clients/profileImages';
 
 export const useProfileImages = (slug: string) => {
   const [images, setImages] = useState<ProfilePicture[]>([]);
+  // Similar to the Next.js app, we can actually see exact error code and enhance functionality if needed e.g.,
+  // Display a "Refresh" button, describe errors differently at user convenience, etc.
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
