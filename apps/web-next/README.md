@@ -31,7 +31,7 @@ The profile slug can also be sourced from `.env`. See the [`.env.example`](./env
 1. `npm run dev` — starts the Next.js dev server.
 2. `npm run build` — builds the Next.js app.
 3. `npm run start` — runs the production build.
-4. `npm run lint` — runs ESLint and checks for Typescript integrity.
+4. `npm run lint` — runs ESLint and checks for TypeScript integrity.
 5. `npm run lint:fix` — same as `npm run lint` but fixes linting errors when possible.
 6. `npm run prettier` — runs Prettier silently.
 7. `npm run prettier:verbose` — runs Prettier with verbose output.

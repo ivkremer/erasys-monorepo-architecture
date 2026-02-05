@@ -35,7 +35,7 @@ export class ProfileClient {
     let res: Response;
 
     try {
-      res = await fetch(`h${this.dataApiBaseUrl}/${profileSlug}`);
+      res = await fetch(`${this.dataApiBaseUrl}/${profileSlug}`);
     } catch (error) {
       throw new ApiResponseError(
         ResponseErrorCode.NETWORK,

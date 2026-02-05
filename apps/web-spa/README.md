@@ -1,6 +1,6 @@
 # Vite App
 
-This is a simple Vite (React + Typescript) app with Tailwind CSS which uses the
+This is a simple Vite (React + TypeScript) app with Tailwind CSS which uses the
 [profile-images](../../packages/profile-images) package.
 
 ## Getting Started

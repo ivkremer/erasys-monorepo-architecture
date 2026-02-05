@@ -7,6 +7,7 @@ import { profileImagesClient } from '@/lib/clients/ProfileImages';
 import { ImagesGrid } from './_components/ImagesGrid';
 import { PROFILE_SLUG } from './constants';
 
+// This caching is made to avoid double-fetching of the same data:
 const getProfileImages = cache(
   async (slug: string): Promise<ProfilePicture[]> => profileImagesClient.fetchProfileImages(slug),
 );
