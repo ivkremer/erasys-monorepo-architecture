@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import { type Metadata } from 'next';
-import { ApiResponseError, type ProfilePicture } from '@repo/profile-images';
+import { ApiResponseError, type ProfileImage } from '@repo/profile-images';
 import { mergeOpenGraph } from '@/lib/next-utils/mergeOpenGraph';
 import { PageLayout } from '@/components/layouts/PageLayout';
 import { profileImagesClient } from '@/lib/clients/ProfileImages';
@@ -9,7 +9,7 @@ import { PROFILE_SLUG } from './constants';
 
 // This caching is made to avoid double-fetching of the same data:
 const getProfileImages = cache(
-  async (slug: string): Promise<ProfilePicture[]> => profileImagesClient.fetchProfileImages(slug),
+  async (slug: string): Promise<ProfileImage[]> => profileImagesClient.fetchProfileImages(slug),
 );
 
 export const dynamic = 'force-static';
@@ -18,7 +18,7 @@ export const revalidate = 3600;
 const PAGE_TITLE = 'Gallery';
 
 export async function generateMetadata(): Promise<Metadata> {
-  let images: ProfilePicture[] = [];
+  let images: ProfileImage[] = [];
 
   try {
     images = await getProfileImages(PROFILE_SLUG);
@@ -52,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  let images: ProfilePicture[] = [];
+  let images: ProfileImage[] = [];
   let isError = false;
 
   try {

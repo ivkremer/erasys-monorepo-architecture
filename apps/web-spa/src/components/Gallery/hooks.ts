@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { type ProfilePicture } from '@repo/profile-images';
+import { type ProfileImage } from '@repo/profile-images';
 import { profileImagesClient } from '@/lib/clients/profileImages';
 
 export const useProfileImages = (slug: string) => {
-  const [images, setImages] = useState<ProfilePicture[]>([]);
+  const [images, setImages] = useState<ProfileImage[]>([]);
   // Similar to the Next.js app, we can actually see exact error code and enhance functionality if needed e.g.,
   // display a "Refresh" button, describe errors differently at user convenience, etc.
   const [isError, setIsError] = useState(false);

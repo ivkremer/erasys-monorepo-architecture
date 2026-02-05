@@ -2,7 +2,7 @@
 
 This is a simple Next.js app with Tailwind CSS which uses the [profile-images](../../packages/profile-images) package.
 
-[See on prod](https://erasys-monorepo-architecture-web-ne-omega.vercel.app/).
+[See on prod](https://erasys-monorepo-architecture-web-ne-omega.vercel.app/) (Hosted on Vercel).
 
 ## Getting Started
 
@@ -16,15 +16,14 @@ open http://localhost:3000 # see the link in the output
 
 ### Details
 
-While `profile-images` has its default values for the API URLs, you can specify your own with the local
-[`.env`](./env):
+While there are defaulted URLs for `profile-images`, you can specify your own with the local `.env` as follows:
 
 ```shell
-PROFILE_DATA_API_URL='https://www.hunqz.com/api/opengrid/profiles'
-PROFILE_PICTURE_API_URL='https://www.hunqz.com/img/usr/original/0x0'
+PROFILE_DATA_API_URL="https://www.hunqz.com/api/opengrid/profiles"
+PROFILE_PICTURE_API_URL="https://www.hunqz.com/img/usr/original/0x0"
 ```
 
-The profile slug can also be sourced from `.env`. See the [`.env.example`](./env.example).
+The profile slug (`"msescortplus"`) can also be sourced from `.env`. See the [`.env.example`](./.env.example).
 
 ## Scripts
 

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/profiles/(.*)",
+      "destination": "https://www.hunqz.com/api/opengrid/profiles/$1"
+    }
+  ]
+}
