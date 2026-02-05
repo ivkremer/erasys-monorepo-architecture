@@ -1,15 +1,4 @@
-import { z } from 'zod';
-
-const PictureApiSchema = z.object({
-  url_token: z.string(),
-  width: z.number(),
-  height: z.number(),
-  id: z.string(),
-});
-
-const ProfileResponseSchema = z.object({
-  pictures: z.array(PictureApiSchema),
-});
+import { ProfileResponseSchema } from './schemas';
 
 export type ProfilePicture = {
   url: string;
@@ -46,7 +35,15 @@ export class ProfileClient {
       throw new Error(`Failed to fetch profile data for '${profileSlug}'.`);
     }
 
-    const data = ProfileResponseSchema.parse(await res.json());
+    let rawJson: unknown;
+
+    try {
+      rawJson = await res.json();
+    } catch (error) {
+      throw new Error(`Invalid JSON returned for '${profileSlug}'.`);
+    }
+
+    const data = ProfileResponseSchema.parse(rawJson);
 
     return data.pictures.map(({ url_token, width, height, id }) => ({
       url: `${this.pictureBaseUrl}/${url_token}.jpg`,

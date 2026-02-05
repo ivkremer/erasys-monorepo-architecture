@@ -74,6 +74,7 @@ const eslintConfig = defineConfig([
     },
     rules: {
       '@typescript-eslint/no-unused-vars': ['error', { caughtErrors: 'none', argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-explicit-any': 'error',
     },
   },
   // React-specific rules
