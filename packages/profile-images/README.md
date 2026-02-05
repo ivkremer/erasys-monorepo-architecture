@@ -21,13 +21,21 @@ try {
 }
 ```
 
+## Specs
+
+```shell
+# vitest installation is needed:
+npm i
+npm run test
+```
+
 ## [Comment for the reviewer]
 
-Note, that thanks to the `exports` section in `package.json` and overall architecture of this package, one cannot
-import just anything from the rest of the files (if any) e.g.,
+Note that thanks to the `exports` section in `package.json` and overall architecture of this package, one cannot
+import just anything from the secondary files e.g.,
 
 ```javascript
-import { someExport } from '@repo/profile-images/src/some-file';
+import { ProfileResponseSchema } from '@repo/profile-images/src/schemas';
 ```
 
 This helps to avoid possible namespace pollution and encapsulate variables which are not meant to be used directly.

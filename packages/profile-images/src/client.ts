@@ -1,15 +1,6 @@
 import { z } from 'zod';
-
-const PictureApiSchema = z.object({
-  url_token: z.string(),
-  width: z.number(),
-  height: z.number(),
-  id: z.string(),
-});
-
-const ProfileResponseSchema = z.object({
-  pictures: z.array(PictureApiSchema),
-});
+import { ProfileResponseSchema } from './schemas';
+import { ApiResponseError, ResponseErrorCode } from './errors';
 
 export type ProfilePicture = {
   url: string;
@@ -33,20 +24,52 @@ export class ProfileClient {
   }
 
   /**
-   * Returns a promise with profile pictures (array).
+   * Returns a promise resolved with profile pictures (array).
    *
    * @param {string} profileSlug
-   * @throws {Error} in case of failed request or invalid API response.
+   * @throws {ApiResponseError} in case of failed request or invalid API response.
    * @return Promise<ProfilePicture[]>
+   * @see ApiResponseError
    */
   async fetchProfileImages(profileSlug: string): Promise<ProfilePicture[]> {
-    const res = await fetch(`${this.dataApiBaseUrl}/${profileSlug}`);
+    let res: Response;
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch profile data for '${profileSlug}'.`);
+    try {
+      res = await fetch(`h${this.dataApiBaseUrl}/${profileSlug}`);
+    } catch (error) {
+      throw new ApiResponseError(
+        ResponseErrorCode.NETWORK,
+        `Network error while fetching profile '${profileSlug}'.`,
+        error,
+      );
     }
 
-    const data = ProfileResponseSchema.parse(await res.json());
+    if (!res.ok) {
+      throw new ApiResponseError(
+        ResponseErrorCode.BAD_HTTP_CODE,
+        `Failed to fetch profile data for '${profileSlug}' (HTTP ${res.status}).`,
+      );
+    }
+
+    let rawJson: unknown;
+
+    try {
+      rawJson = await res.json();
+    } catch (error) {
+      throw new ApiResponseError(ResponseErrorCode.INVALID_JSON, `Invalid JSON returned for '${profileSlug}'.`, error);
+    }
+
+    let data: z.infer<typeof ProfileResponseSchema>;
+
+    try {
+      data = ProfileResponseSchema.parse(rawJson);
+    } catch (error) {
+      throw new ApiResponseError(
+        ResponseErrorCode.INVALID_API_RESPONSE,
+        `Invalid API response for '${profileSlug}'.`,
+        error,
+      );
+    }
 
     return data.pictures.map(({ url_token, width, height, id }) => ({
       url: `${this.pictureBaseUrl}/${url_token}.jpg`,
