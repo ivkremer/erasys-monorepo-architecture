@@ -6,15 +6,15 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:web": "npm run dev -w apps/web-next",
+    "dev:next": "npm run dev -w apps/web-next",
     "dev:spa": "npm run dev -w apps/web-spa",
-    "build": "npm run build --workspaces",
-    "test": "npm run test -w packages/profile-images",
-    "lint": "npm run lint --workspaces",
-    "lint:fix": "npm run lint:fix --workspaces",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
     "lint-staged": "lint-staged",
-    "prettier": "npm run prettier --workspaces",
-    "prettier:verbose": "npm run prettier:verbose --workspaces",
+    "prettier": "turbo run prettier",
+    "prettier:verbose": "turbo run prettier:verbose",
     "prepare": "node scripts/prepare-husky.cjs"
   },
   "repository": {
@@ -32,7 +32,8 @@
     "eslint-plugin-react": "^7.37.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "turbo": "^2.8.3"
   },
   "lint-staged": {
     "**/*": [
@@ -41,5 +42,9 @@
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
+  },
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=20.19"
   }
 }
