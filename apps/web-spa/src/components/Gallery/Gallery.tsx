@@ -1,15 +1,15 @@
-import Image from 'next/image';
-import type { ProfilePicture } from '@repo/profile-images';
-import { FailureAlert } from './FailureAlert';
-import { EAGER_LOADING_THRESHOLD } from './constants';
+import { FailureAlert } from './FailureAlert.tsx';
+import { useProfileImages } from './hooks.ts';
+import { EAGER_LOADING_THRESHOLD, PROFILE_SLUG } from './constants.ts';
 
-type Props = {
-  images: ProfilePicture[];
-  error: boolean;
-};
+export const Gallery = () => {
+  const { images, isError, isLoading } = useProfileImages(PROFILE_SLUG);
 
-export const ImagesGrid = ({ images, error }: Props) => {
-  if (error) {
+  if (isLoading) {
+    return <FailureAlert>Loading images…</FailureAlert>;
+  }
+
+  if (isError) {
     return <FailureAlert>Failed to load images ):</FailureAlert>;
   }
 
@@ -22,14 +22,11 @@ export const ImagesGrid = ({ images, error }: Props) => {
       {images.map(({ id, url }, index) => (
         <li key={id} className="relative aspect-square overflow-hidden rounded-lg bg-muted shadow-sm">
           <a href={url} target="_blank" rel="noreferrer" className="absolute inset-0">
-            <Image
+            <img
               src={url}
               alt={`Profile image (${index + 1})`}
-              fill
-              className="object-cover object-center hover:scale-105 transition-transform"
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="w-full h-full object-cover object-center hover:scale-105 transition-transform"
               loading={index < EAGER_LOADING_THRESHOLD ? 'eager' : 'lazy'}
-              preload={index < EAGER_LOADING_THRESHOLD}
               decoding="async"
             />
           </a>

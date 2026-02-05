@@ -1,12 +1,15 @@
 import { cache } from 'react';
 import { type Metadata } from 'next';
-import { fetchProfileImages, type ProfilePicture } from '@repo/profile-images';
+import { type ProfilePicture } from '@repo/profile-images';
 import { mergeOpenGraph } from '@/lib/next-utils/mergeOpenGraph';
 import { PageLayout } from '@/components/layouts/PageLayout';
+import { profileImagesClient } from '@/lib/clients/ProfileImages';
 import { ImagesGrid } from './_components/ImagesGrid';
 import { PROFILE_SLUG } from './constants';
 
-const getProfileImages = cache(async (slug: string): Promise<ProfilePicture[]> => fetchProfileImages(slug));
+const getProfileImages = cache(
+  async (slug: string): Promise<ProfilePicture[]> => profileImagesClient.fetchProfileImages(slug),
+);
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
