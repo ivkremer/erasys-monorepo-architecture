@@ -1,5 +1,5 @@
 {
-  "name": "@repo/profile-images",
+  "name": "@repo/profile-pictures",
   "version": "1.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

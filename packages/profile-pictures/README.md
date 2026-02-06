@@ -5,9 +5,9 @@ A client which fetches profile data from the specific API and provides the array
 ## Usage
 
 ```typescript
-import { ProfileClient, type ProfilePicture } from '@repo/profile-images';
+import { ProfilePicturesClient, type ProfilePicture } from '@repo/profile-pictures';
 
-export const client = new ProfileClient({
+export const client = new ProfilePicturesClient({
   dataApiBaseUrl: '/your/api/opengrid/profiles',
   pictureBaseUrl: 'https://yourimageshost/img/usr/original/0x0',
 });
@@ -15,7 +15,7 @@ export const client = new ProfileClient({
 let images: ProfilePicture[] = [];
 
 try {
-  images = await client.fetchProfileImages('profile-slug');
+  images = await client.fetchProfilePictures('profile-slug');
 } catch (error) {
   // handle error
 }
@@ -44,7 +44,7 @@ Note that thanks to the `exports` section in `package.json` and overall architec
 import just anything from the secondary files e.g.,
 
 ```typescript
-import { ProfileResponseSchema } from '@repo/profile-images/src/schemas';
+import { ProfileResponseSchema } from '@repo/profile-pictures/src/schemas';
 ```
 
 This helps to avoid possible namespace pollution and encapsulate variables which are not meant to be used directly.

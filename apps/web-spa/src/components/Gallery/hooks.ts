@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { type ProfileImage } from '@repo/profile-images';
-import { profileImagesClient } from '@/lib/clients/profileImages';
+import { ApiResponseError, type ProfilePicture } from '@repo/profile-pictures';
+import { profilePicturesClient } from '@/lib/clients/ProfilePictures.ts';
 
-export const useProfileImages = (slug: string) => {
-  const [images, setImages] = useState<ProfileImage[]>([]);
+export const useProfilePictures = (slug: string) => {
+  const [pictures, setPictures] = useState<ProfilePicture[]>([]);
   // Similar to the Next.js app, we can actually see exact error code and enhance functionality if needed e.g.,
   // display a "Refresh" button, describe errors differently at user convenience, etc.
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState<ApiResponseError | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -14,20 +14,20 @@ export const useProfileImages = (slug: string) => {
     const signal = abortController.signal;
 
     setIsLoading(true);
-    setIsError(false);
+    setError(null);
 
-    profileImagesClient
-      .fetchProfileImages(slug)
+    profilePicturesClient
+      .fetchProfilePictures(slug)
       .then((data) => {
         if (!signal.aborted) {
-          setImages(data);
+          setPictures(data);
         }
       })
       .catch((error) => {
         if (!signal.aborted) {
-          setIsError(true);
+          setError(error);
           // eslint-disable-next-line no-console
-          console.error('Failed to fetch profile images:', error);
+          console.error('Failed to fetch profile pictures:', error);
         }
       })
       .finally(() => {
@@ -41,5 +41,5 @@ export const useProfileImages = (slug: string) => {
     };
   }, [slug]);
 
-  return { images, isError, isLoading };
+  return { pictures, error, isLoading };
 };

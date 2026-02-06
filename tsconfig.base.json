@@ -17,7 +17,7 @@
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx",
     "paths": {
-      "@repo/profile-images": ["./packages/profile-images/src/index.ts"]
+      "@repo/profile-pictures": ["./packages/profile-pictures/src/index.ts"]
     }
   },
   "exclude": ["node_modules"]

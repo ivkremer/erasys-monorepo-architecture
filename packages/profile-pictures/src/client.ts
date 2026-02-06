@@ -2,23 +2,27 @@ import { z } from 'zod';
 import { ProfileResponseSchema } from './schemas';
 import { ApiResponseError, ResponseErrorCode } from './errors';
 
-export type ProfileImage = {
+// As the demo API started responding with 404 (https://www.hunqz.com/api/opengrid/profiles/msescortplus),
+// I tried it with one of the other profiles, and it started failing due to the possibility of items consisting of
+// `url_token` property only.
+// I adjusted the schema accordingly.
+export type ProfilePicture = {
   url: string;
-  width: number;
-  height: number;
-  id: string;
+  width?: number;
+  height?: number;
+  id?: string;
 };
 
-export type ProfileImagesClientConfig = {
+export type ProfilePicturesClientConfig = {
   dataApiBaseUrl: string;
   pictureBaseUrl: string;
 };
 
-export class ProfileImagesClient {
+export class ProfilePicturesClient {
   private readonly dataApiBaseUrl: string;
   private readonly pictureBaseUrl: string;
 
-  constructor(config: ProfileImagesClientConfig) {
+  constructor(config: ProfilePicturesClientConfig) {
     this.dataApiBaseUrl = config.dataApiBaseUrl;
     this.pictureBaseUrl = config.pictureBaseUrl;
   }
@@ -28,10 +32,10 @@ export class ProfileImagesClient {
    *
    * @param {string} profileSlug
    * @throws {ApiResponseError} in case of failed request or invalid API response.
-   * @return Promise<ProfileImage[]>
+   * @return Promise<ProfilePicture[]>
    * @see ApiResponseError
    */
-  async fetchProfileImages(profileSlug: string): Promise<ProfileImage[]> {
+  async fetchProfilePictures(profileSlug: string): Promise<ProfilePicture[]> {
     let res: Response;
 
     try {

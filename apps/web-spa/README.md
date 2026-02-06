@@ -1,7 +1,7 @@
 # Vite App
 
 This is a simple Vite (React + TypeScript) app with Tailwind CSS which uses
-the [profile-images](../../packages/profile-images) package.
+the [profile-pictures](../../packages/profile-pictures) package.
 
 [See on prod](https://erasys-monorepo-architecture-web-sp.vercel.app/) (Hosted on Vercel).
 
@@ -13,7 +13,7 @@ npm run dev
 open http://localhost:5173/ # see the link in the output
 ```
 
-It’s possible to source the profile slug from your `.env`:
+It’s possible to source the profile slug (like `"msescortplus"`) from your `.env`:
 
 ```shell
 VITE_PROFILE_SLUG="profile-slug-value"
