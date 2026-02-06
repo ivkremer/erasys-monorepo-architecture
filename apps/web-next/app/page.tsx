@@ -6,7 +6,7 @@ export default function Home() {
   return (
     // PageLayout has a default title which is the name of the website.
     <PageLayout>
-      <p className="mt-2">Here are some comments regarding design choices, and more.</p>
+      <p className="-mt-2">Here are some comments regarding design choices, and more.</p>
       <h2>Pages</h2>
       <p>
         There are two pages in this app — this one (Home) and <code>/gallery</code> to better demonstrate the SEO
