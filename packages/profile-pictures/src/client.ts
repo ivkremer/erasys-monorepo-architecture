@@ -2,6 +2,10 @@ import { z } from 'zod';
 import { ProfileResponseSchema } from './schemas';
 import { ApiResponseError, ResponseErrorCode } from './errors';
 
+// As the demo API started responding with 404 (https://www.hunqz.com/api/opengrid/profiles/msescortplus),
+// I tried it with one of the other profiles, and it started failing due to the possibility of items consisting of
+// `url_token` property only.
+// I adjusted the schema accordingly.
 export type ProfilePicture = {
   url: string;
   width?: number;
