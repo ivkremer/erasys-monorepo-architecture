@@ -25,7 +25,7 @@ Run the [Vite](./apps/web-spa) app:
 npm run dev:spa
 ```
 
-See the shared [`profile-images`](./packages/profile-images) package.
+See the shared [`profile-pictures`](./packages/profile-pictures) package.
 
 Run its specs:
 

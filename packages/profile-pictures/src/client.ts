@@ -2,23 +2,23 @@ import { z } from 'zod';
 import { ProfileResponseSchema } from './schemas';
 import { ApiResponseError, ResponseErrorCode } from './errors';
 
-export type ProfileImage = {
+export type ProfilePicture = {
   url: string;
-  width: number;
-  height: number;
-  id: string;
+  width?: number;
+  height?: number;
+  id?: string;
 };
 
-export type ProfileImagesClientConfig = {
+export type ProfilePicturesClientConfig = {
   dataApiBaseUrl: string;
   pictureBaseUrl: string;
 };
 
-export class ProfileImagesClient {
+export class ProfilePicturesClient {
   private readonly dataApiBaseUrl: string;
   private readonly pictureBaseUrl: string;
 
-  constructor(config: ProfileImagesClientConfig) {
+  constructor(config: ProfilePicturesClientConfig) {
     this.dataApiBaseUrl = config.dataApiBaseUrl;
     this.pictureBaseUrl = config.pictureBaseUrl;
   }
@@ -28,10 +28,10 @@ export class ProfileImagesClient {
    *
    * @param {string} profileSlug
    * @throws {ApiResponseError} in case of failed request or invalid API response.
-   * @return Promise<ProfileImage[]>
+   * @return Promise<ProfilePicture[]>
    * @see ApiResponseError
    */
-  async fetchProfileImages(profileSlug: string): Promise<ProfileImage[]> {
+  async fetchProfilePictures(profileSlug: string): Promise<ProfilePicture[]> {
     let res: Response;
 
     try {
